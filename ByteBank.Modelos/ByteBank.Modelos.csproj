@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <Compile Remove="Class1.cs" />
-    <Compile Remove="Funcionarios\Diretor.cs" />
   </ItemGroup>
 
 </Project>
