@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bytebank.SistemaAgencia;
 using ByteBank.Modelos;
 using ByteBank.Modelos.Funcionarios;
 
@@ -12,7 +13,20 @@ namespace ByteBank.SistemaAgencia
     {
         static void Main(string[] args)
         {
-            ListaDeCliente
+            Lista<int> idades = new Lista<int>();
+            idades.Adicionar(5);
+            idades.AdicionarVarios(1, 5, 50, 78);
+
+            int idadeSoma = 0;
+            for(int i = 0; i < idades.Tamanho; i++)
+            {
+                int idadeAtual = idades[i];
+                Console.WriteLine($"Idade no indice {i}: {idadeAtual}");
+                idadeSoma += idadeAtual;
+            }
+
+            Console.WriteLine($"Soma das Idades: {idadeSoma}");
+
             Console.WriteLine(SomarVarios(1, 2, 3, 5, 56465, 45));
             Console.WriteLine(SomarVarios(1, 2, 45));
             
@@ -29,7 +43,23 @@ namespace ByteBank.SistemaAgencia
             }
             return acumulador;
         }
+        static void TestaListaDeObject()
+        {
+            ListaDeObject listaDeIdade = new ListaDeObject();
 
+            listaDeIdade.Adicionar(10);
+            listaDeIdade.Adicionar(5);
+            listaDeIdade.Adicionar(4);
+            listaDeIdade.AdicionarVarios(16, 26, 60);
+
+            for (int i = 0; i < listaDeIdade.Tamanho; i++)
+            {
+                int idade = (int)listaDeIdade[i];
+                Console.WriteLine($"Idade no indice {i}: {idade}");
+            }
+
+
+        }
 
         static void TestaListaDeContaCorrente()
         {
