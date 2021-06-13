@@ -13,23 +13,15 @@ namespace ByteBank.SistemaAgencia
     {
         static void Main(string[] args)
         {
-            Lista<int> idades = new Lista<int>();
-            idades.Adicionar(5);
-            idades.AdicionarVarios(1, 5, 50, 78);
 
-            int idadeSoma = 0;
-            for(int i = 0; i < idades.Tamanho; i++)
-            {
-                int idadeAtual = idades[i];
-                Console.WriteLine($"Idade no indice {i}: {idadeAtual}");
-                idadeSoma += idadeAtual;
-            }
+            MinhaClasse<Funcionario>.ContadorEstatico++;
+            MinhaClasse<Funcionario>.ContadorEstatico++;
+            MinhaClasse<Diretor>.ContadorEstatico++;
+            MinhaClasse<Funcionario>.ContadorEstatico++;
 
-            Console.WriteLine($"Soma das Idades: {idadeSoma}");
+            Console.WriteLine(MinhaClasse<Diretor>.ContadorEstatico);
+            Console.WriteLine(MinhaClasse<Funcionario>.ContadorEstatico);
 
-            Console.WriteLine(SomarVarios(1, 2, 3, 5, 56465, 45));
-            Console.WriteLine(SomarVarios(1, 2, 45));
-            
 
             Console.ReadLine();
         }
@@ -42,6 +34,25 @@ namespace ByteBank.SistemaAgencia
                 acumulador += numero;
             }
             return acumulador;
+        }
+        static void TestalistaT()
+        {
+            Lista<int> idades = new Lista<int>();
+            idades.Adicionar(5);
+            idades.AdicionarVarios(1, 5, 50, 78);
+
+            int idadeSoma = 0;
+            for (int i = 0; i < idades.Tamanho; i++)
+            {
+                int idadeAtual = idades[i];
+                Console.WriteLine($"Idade no indice {i}: {idadeAtual}");
+                idadeSoma += idadeAtual;
+            }
+
+            Console.WriteLine($"Soma das Idades: {idadeSoma}");
+
+            Console.WriteLine(SomarVarios(1, 2, 3, 5, 56465, 45));
+            Console.WriteLine(SomarVarios(1, 2, 45));
         }
         static void TestaListaDeObject()
         {
