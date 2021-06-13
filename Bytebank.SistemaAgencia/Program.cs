@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bytebank.SistemaAgencia;
+using Bytebank.SistemaAgencia.Comparadores;
+using Bytebank.SistemaAgencia.Extensoes;
 using ByteBank.Modelos;
 using ByteBank.Modelos.Funcionarios;
 
@@ -12,6 +14,63 @@ namespace ByteBank.SistemaAgencia
     class Program
     {
         static void Main(string[] args)
+        {
+            var contas = new List<ContaCorrente>()
+            {
+                new ContaCorrente(340, 18509),
+                null,
+                new ContaCorrente(304, 150503),
+                new ContaCorrente(304, 190840),
+                null,
+                new ContaCorrente(410, 4664),
+                new ContaCorrente(410, 1965),
+                null,
+                new ContaCorrente(290, 190800),
+                new ContaCorrente(290, 109940)
+            };
+
+            var contasNaoNulas = contas.Where(contas => contas != null);
+            //contas.Sort(); ~~> Chamar a imprelementação dada em IComparable
+            //contas.Sort(new ComparadorContaCorrentePorAgencia());
+            IOrderedEnumerable<ContaCorrente> contasOrdenada = contasNaoNulas.OrderBy(conta => conta.Numero);
+
+            foreach (var conta in contasOrdenada)
+            {
+               Console.WriteLine($"Conta número {conta.Numero}, ag. {conta.Agencia}");
+            }
+
+
+            Console.ReadLine();
+        }
+        static void TestandoListas()
+        {
+
+            var nomes = new List<string>
+            {
+                "Guilherme", "wellington", "Marcia", "Rodolfo", "Ana"
+            };
+            nomes.Sort();
+            foreach (var nome in nomes)
+            {
+                Console.WriteLine(nome);
+            }
+
+            var idades = new List<int>();
+            idades.Add(5);
+            idades.Add(45);
+            idades.Add(20);
+            idades.Add(35);
+            idades.AdicionarVarios(15, 25, 4, 28);
+            idades.Sort();
+            int idadeSoma = 0;
+            for (int i = 0; i < idades.Count; i++)
+            {
+                Console.WriteLine($"Idade no indice {i}: {idades[i]}");
+                idadeSoma += idades[i];
+            }
+        }
+
+        static void Estatico()
         {
 
             MinhaClasse<Funcionario>.ContadorEstatico++;
@@ -22,8 +81,6 @@ namespace ByteBank.SistemaAgencia
             Console.WriteLine(MinhaClasse<Diretor>.ContadorEstatico);
             Console.WriteLine(MinhaClasse<Funcionario>.ContadorEstatico);
 
-
-            Console.ReadLine();
         }
 
         static int SomarVarios(params int[] numeros)
@@ -35,25 +92,24 @@ namespace ByteBank.SistemaAgencia
             }
             return acumulador;
         }
+
         static void TestalistaT()
         {
             Lista<int> idades = new Lista<int>();
             idades.Adicionar(5);
             idades.AdicionarVarios(1, 5, 50, 78);
-
+            idades.Remover(5);
             int idadeSoma = 0;
             for (int i = 0; i < idades.Tamanho; i++)
             {
-                int idadeAtual = idades[i];
-                Console.WriteLine($"Idade no indice {i}: {idadeAtual}");
-                idadeSoma += idadeAtual;
+                Console.WriteLine($"Idade no indice {i}: {idades[i]}");
+                idadeSoma += idades[i];
             }
 
             Console.WriteLine($"Soma das Idades: {idadeSoma}");
 
-            Console.WriteLine(SomarVarios(1, 2, 3, 5, 56465, 45));
-            Console.WriteLine(SomarVarios(1, 2, 45));
         }
+
         static void TestaListaDeObject()
         {
             ListaDeObject listaDeIdade = new ListaDeObject();
@@ -106,8 +162,6 @@ namespace ByteBank.SistemaAgencia
                 Console.WriteLine($"Item na posição {i} = Conta {itemAtual.Numero}/{itemAtual.Agencia}");
             }
         }
-
-
 
         static void TestaArrayDeContaCorrente()
         {
