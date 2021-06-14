@@ -16,9 +16,20 @@ namespace ByteBank.SistemaAgencia
     {
         static void Main(string[] args)
         {
-            LeituraBinaria();
+            var linhas = File.ReadAllLines("contas.txt");
+            Console.WriteLine(linhas.Length);
 
-            //TestaEscrita();
+            foreach (var contas in linhas)
+            {
+                Console.WriteLine(contas);
+            }
+
+            Console.WriteLine("Digite o seu nome:");
+            var nome = Console.ReadLine();
+            Console.WriteLine(nome);
+
+            // UsarStreamDeEntrada();
+
             Console.WriteLine("Aplicação Finalizada!");
 
             Console.ReadLine();
